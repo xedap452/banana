@@ -130,12 +130,14 @@ class Banana:
 
     def get_token(self, data):
         url = f"https://interface.carv.io/banana/login"
-
+        x_interceptor_id = self.SA()
         headers = {
             "Accept": "application/json, text/plain, */*",
             "Origin": "https://banana.carv.io",
             "Referer": "https://banana.carv.io/",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+            "X-App-Id": "carv",
+            "X-Interceptor-Id": x_interceptor_id
         }
 
         data = {"tgInfo": f"{data}"}
@@ -741,7 +743,11 @@ class Banana:
 
 
                 except Exception as e:
-                    self.log(f"{red}Đăng nhập thất bại, thử lại sau!")
+                    self.log(f"{red}Lỗi không xác định:")
+                    self.log(f"{red}Type: {type(e).__name__}")
+                    self.log(f"{red}Error: {str(e)}")
+                    self.log(f"{red}Traceback:")
+                    self.log(f"{red}{traceback.format_exc()}")
 
             print()
             wait_time = max(1, int(self.min_harvest_time * 60))
